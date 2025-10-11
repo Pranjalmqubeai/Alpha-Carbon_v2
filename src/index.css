@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ——— Light Theme Tokens ——— */
+:root{
+  --bg: 255 255 255;
+  --fg: 17 24 39;            /* slate-900 */
+  --muted: 100 116 139;      /* slate-500 */
+  --ring: 14 165 233;        /* sky-500 */
+  --border: 226 232 240;     /* slate-200 */
+
+  --brand-1: 22 163 74;      /* green-600 */
+  --brand-2: 2 132 199;      /* sky-600 */
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+}
+
+/* Accent gradient for headings / CTAs */
+.text-gradient {
+  background: linear-gradient(90deg, rgb(var(--brand-1)), rgb(var(--brand-2)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Card polish */
+.card {
+  @apply rounded-2xl border shadow-sm bg-white;
+  border-color: rgb(var(--border));
+}
+
+/* Focus ring */
+.focus-ring {
+  @apply outline-none ring-2 ring-offset-2 ring-offset-white;
+  box-shadow: 0 0 0 2px rgba(14,165,233,.15);
+}
