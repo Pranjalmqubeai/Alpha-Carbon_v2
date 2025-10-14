@@ -54,7 +54,7 @@ export default function Footer() {
             <div className="flex items-center gap-4 text-sm text-slate-500">
               <div className="flex items-center gap-2">
                 <Lock className="h-4 w-4 text-emerald-600" />
-                <span>Stealth Mode Active</span>
+                {/* <span>Stealth Mode Active</span> */} Alpha Carbon Beleive
               </div>
               <span>•</span>
               <span>© {new Date().getFullYear()} Alpha Carbon</span>

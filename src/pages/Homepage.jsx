@@ -10,6 +10,7 @@ import {
   Send,
 } from "lucide-react";
 
+
 const TEASERS = [
   {
     title: "Autonomous Carbon Intelligence",
@@ -88,13 +89,8 @@ export default function LightHomepage() {
 
   return (
     <div className="bg-gradient-to-b from-emerald-50 via-white to-emerald-50/30 text-slate-800">
-      {/* Light Stealth Badge */}
-      <div className="fixed top-6 right-6 z-50 bg-white/70 backdrop-blur border border-emerald-300 px-6 py-3 rounded-full text-emerald-700 font-semibold text-sm shadow">
-        <div className="flex items-center gap-2">
-          <Lock className="w-4 h-4" />
-          STEALTH MODE
-        </div>
-      </div>
+      
+      
 
       {/* HERO */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -409,9 +405,7 @@ export default function LightHomepage() {
                 <h3 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
                   Be the First to Know When We
                   <br />
-                  <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                    Exit Stealth Mode
-                  </span>
+                  
                 </h3>
 
                 <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -482,7 +476,8 @@ export default function LightHomepage() {
               </div>
             </div>
           </div>
-        </div>
+              </div>
+             
       </section>
 
       {/* FOOTER STRIP */}
