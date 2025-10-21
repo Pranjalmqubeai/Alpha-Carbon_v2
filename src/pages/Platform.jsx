@@ -50,38 +50,37 @@ const Platform = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-slate-50 via-emerald-50/30 to-white py-24 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-white text-emerald-700 px-5 py-2 rounded-full text-sm font-medium mb-8 shadow-sm border border-emerald-100">
+      <section className="bg-gradient-to-b from-emerald-50 to-white py-20 px-6">
+        <div className="max-w-5xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
             <CheckCircle className="w-4 h-4" />
             Carbon OS Platform
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-light text-slate-900 mb-6 tracking-tight">
-            Enterprise Carbon
-            <span className="block font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Intelligence Platform</span>
+          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
+            Enterprise Carbon Intelligence Platform
           </h1>
           
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed">
-            A comprehensive operating system for carbon management—from precise measurement to strategic monetization. 
-            Engineered for the world's most emission-intensive industries.
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
+            A complete operating system for carbon management - from measurement to monetization. 
+            Built for the world's most emission-intensive industries.
           </p>
           
-          <button className="bg-slate-900 text-white px-10 py-4 rounded-lg font-medium hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl">
+          <button className="bg-emerald-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-emerald-700 transition-colors">
             Schedule a Demo
           </button>
         </div>
       </section>
 
       {/* Core Features */}
-      <section className="py-24 px-6">
+      <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-5 tracking-tight">
-              Core Platform <span className="font-semibold">Features</span>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">
+              Core Platform Features
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              A comprehensive suite designed to measure, verify, and monetize your carbon initiatives with precision
+              Everything you need to measure, verify, and monetize your carbon initiatives
             </p>
           </div>
 
@@ -89,24 +88,24 @@ const Platform = () => {
             {FEATURES.map((feature) => {
               const Icon = feature.icon;
               return (
-                <div key={feature.title} className="bg-white border border-slate-100 rounded-2xl p-10 hover:shadow-xl hover:border-emerald-100 transition-all group">
-                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <Icon className="w-7 h-7 text-emerald-600" />
+                <div key={feature.title} className="bg-white border border-slate-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-emerald-600" />
                   </div>
                   
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-4">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-3">
                     {feature.title}
                   </h3>
                   
-                  <p className="text-slate-600 mb-6 leading-relaxed">
+                  <p className="text-slate-600 mb-4">
                     {feature.description}
                   </p>
                   
-                  <ul className="space-y-3">
+                  <ul className="space-y-2">
                     {feature.benefits.map((benefit) => (
-                      <li key={benefit} className="flex items-center gap-3 text-slate-700">
-                        <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                        <span className="text-sm">{benefit}</span>
+                      <li key={benefit} className="flex items-center gap-2 text-slate-700">
+                        <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                        <span>{benefit}</span>
                       </li>
                     ))}
                   </ul>
@@ -118,11 +117,11 @@ const Platform = () => {
       </section>
 
       {/* Capabilities Section */}
-      <section className="bg-gradient-to-b from-slate-50 to-white py-24 px-6">
+      <section className="bg-slate-50 py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-5 tracking-tight">
-              Platform <span className="font-semibold">Capabilities</span>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">
+              Platform Capabilities
             </h2>
             <p className="text-lg text-slate-600">
               End-to-end carbon lifecycle management
@@ -133,16 +132,16 @@ const Platform = () => {
             {CAPABILITIES.map((capability) => {
               const Icon = capability.icon;
               return (
-                <div key={capability.title} className="bg-white rounded-2xl p-8 text-center border border-slate-100 hover:shadow-xl transition-all group">
-                  <div className="w-20 h-20 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform shadow-lg">
-                    <Icon className="w-10 h-10 text-white" />
+                <div key={capability.title} className="bg-white rounded-xl p-6 text-center border border-slate-200">
+                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <Icon className="w-8 h-8 text-white" />
                   </div>
                   
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">
                     {capability.title}
                   </h3>
                   
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-slate-600">
                     {capability.description}
                   </p>
                 </div>
@@ -153,18 +152,18 @@ const Platform = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-5 tracking-tight">
-              How It <span className="font-semibold">Works</span>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">
+              How It Works
             </h2>
             <p className="text-lg text-slate-600">
-              Seamless integration, transformative results
+              Simple integration, powerful results
             </p>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-8">
             {[
               {
                 step: "01",
@@ -187,15 +186,15 @@ const Platform = () => {
                 description: "Real-time dashboards show your carbon footprint, reduction progress, and monetization opportunities. AI provides actionable recommendations."
               }
             ].map((item) => (
-              <div key={item.step} className="flex gap-8 items-start group">
-                <div className="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center text-white font-light text-2xl shadow-lg group-hover:scale-105 transition-transform">
+              <div key={item.step} className="flex gap-6 items-start">
+                <div className="flex-shrink-0 w-16 h-16 bg-emerald-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
                   {item.step}
                 </div>
-                <div className="flex-1 pt-2">
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-3">
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-slate-600 text-lg leading-relaxed">
+                  <p className="text-slate-600 text-lg">
                     {item.description}
                   </p>
                 </div>
@@ -206,19 +205,19 @@ const Platform = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-24 px-6">
+      <section className="bg-slate-900 py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
-            Ready to Transform Your <span className="font-semibold">Carbon Strategy?</span>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Ready to Transform Your Carbon Strategy?
           </h2>
-          <p className="text-xl text-slate-300 mb-10 leading-relaxed">
+          <p className="text-xl text-slate-300 mb-8">
             Join industry leaders using Carbon OS to achieve net-zero faster
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <button className="bg-emerald-600 text-white px-10 py-4 rounded-lg font-medium hover:bg-emerald-500 transition-all shadow-lg hover:shadow-xl">
+            <button className="bg-emerald-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-emerald-700 transition-colors">
               Request Demo
             </button>
-            <button className="bg-transparent text-white px-10 py-4 rounded-lg font-medium border-2 border-slate-600 hover:border-white hover:bg-white/10 transition-all">
+            <button className="bg-transparent text-white px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white hover:text-slate-900 transition-colors">
               View Documentation
             </button>
           </div>

@@ -7,7 +7,7 @@ import {
   Database,
   ShieldCheck,
   Download,
-  Link,
+  Link as LinkIcon,
   Library,
   FolderGit2
 } from 'lucide-react';
@@ -102,29 +102,28 @@ const DEV_ASSETS = [
 const Resources = () => {
   return (
     <div className="bg-white">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-b from-slate-50 via-emerald-50/30 to-white py-24 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-white text-emerald-700 px-5 py-2 rounded-full text-sm font-medium mb-8 shadow-sm border border-emerald-100">
+      {/* Hero — emerald theme */}
+      <section className="bg-gradient-to-b from-emerald-50 to-white py-20 px-6">
+        <div className="max-w-5xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
             <BookOpen className="w-4 h-4" />
             Resources & Knowledge Center
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-light text-slate-900 mb-6 tracking-tight">
-            Knowledge That
-            <span className="block font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Accelerates Net Zero</span>
+          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
+            Knowledge That Accelerates Net Zero
           </h1>
 
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
             Research, technical briefs, datasets, and developer tools to help you build credible,
             high-impact carbon intelligence with Carbon OS.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <button className="bg-slate-900 text-white px-10 py-4 rounded-lg font-medium hover:bg-slate-800 transition-all shadow-lg hover:shadow-xl">
+            <button className="bg-emerald-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-emerald-700 transition-colors">
               Read Whitepapers
             </button>
-            <button className="bg-white text-slate-900 px-10 py-4 rounded-lg font-medium border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all">
+            <button className="bg-white text-slate-900 px-8 py-4 rounded-lg font-semibold border-2 border-slate-200 hover:bg-slate-50 transition-colors">
               Access Developer Hub
             </button>
           </div>
@@ -132,12 +131,10 @@ const Resources = () => {
       </section>
 
       {/* Featured Reports */}
-      <section className="py-24 px-6">
+      <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-5 tracking-tight">
-              Featured <span className="font-semibold">Reports</span>
-            </h2>
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Featured Reports</h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
               Curated research to guide MRV, tokenization, and industrial decarbonization.
             </p>
@@ -147,18 +144,18 @@ const Resources = () => {
             {FEATURED_REPORTS.map((r) => {
               const Icon = r.icon;
               return (
-                <div key={r.title} className="bg-white border border-slate-100 rounded-2xl p-8 hover:shadow-xl hover:border-emerald-100 transition-all group">
-                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <Icon className="w-7 h-7 text-emerald-600" />
+                <div key={r.title} className="bg-white border border-slate-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-emerald-600" />
                   </div>
-                  <span className="text-xs uppercase tracking-wider text-slate-500 font-medium">{r.kind}</span>
-                  <h3 className="text-2xl font-semibold text-slate-900 mt-2 mb-4 leading-tight">{r.title}</h3>
-                  <p className="text-slate-600 mb-8 leading-relaxed">{r.summary}</p>
-                  <div className="flex items-center gap-3">
-                    <button className="bg-slate-900 text-white px-5 py-3 rounded-lg text-sm font-medium hover:bg-slate-800 transition-all">
+                  <span className="text-xs uppercase tracking-wide text-slate-500">{r.kind}</span>
+                  <h3 className="text-2xl font-bold text-slate-900 mt-1 mb-3">{r.title}</h3>
+                  <p className="text-slate-600 mb-6">{r.summary}</p>
+                  <div className="flex items-center gap-2">
+                    <button className="bg-slate-900 text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-slate-800 transition-colors">
                       {r.action.label}
                     </button>
-                    <button className="bg-white text-slate-700 px-5 py-3 rounded-lg text-sm font-medium border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all inline-flex items-center gap-2">
+                    <button className="bg-white text-slate-900 px-4 py-2.5 rounded-lg text-sm font-semibold border border-slate-200 hover:bg-slate-50 transition-colors inline-flex items-center gap-2">
                       <Download className="w-4 h-4" />
                       PDF
                     </button>
@@ -171,12 +168,10 @@ const Resources = () => {
       </section>
 
       {/* Knowledge Center */}
-      <section className="bg-gradient-to-b from-slate-50 to-white py-24 px-6">
+      <section className="bg-emerald-50/50 py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-5 tracking-tight">
-              Knowledge <span className="font-semibold">Center</span>
-            </h2>
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Knowledge Center</h2>
             <p className="text-lg text-slate-600">
               Industry-specific insights, templates, and benchmarks.
             </p>
@@ -186,16 +181,16 @@ const Resources = () => {
             {KNOWLEDGE_CARDS.map((k) => {
               const Icon = k.icon;
               return (
-                <div key={k.title} className="bg-white rounded-2xl p-8 border border-slate-100 hover:shadow-xl transition-all group">
-                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-105 transition-transform shadow-lg">
-                    <Icon className="w-8 h-8 text-white" />
+                <div key={k.title} className="bg-white rounded-xl p-6 border border-slate-200">
+                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center mb-4">
+                    <Icon className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-4">{k.title}</h3>
-                  <ul className="space-y-3 text-slate-600">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{k.title}</h3>
+                  <ul className="space-y-2 text-slate-700">
                     {k.points.map((p) => (
-                      <li key={p} className="flex items-start gap-3">
-                        <span className="mt-2 block w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
-                        <span className="text-sm leading-relaxed">{p}</span>
+                      <li key={p} className="flex items-start gap-2">
+                        <span className="mt-1 block w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                        <span>{p}</span>
                       </li>
                     ))}
                   </ul>
@@ -207,12 +202,10 @@ const Resources = () => {
       </section>
 
       {/* Developer Hub */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-5 tracking-tight">
-              Developer <span className="font-semibold">Hub</span>
-            </h2>
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Developer Hub</h2>
             <p className="text-lg text-slate-600">
               Build with Carbon OS: APIs, SDKs, datasets, and examples.
             </p>
@@ -222,14 +215,14 @@ const Resources = () => {
             {DEV_ASSETS.map((d) => {
               const Icon = d.icon;
               return (
-                <div key={d.title} className="bg-white border border-slate-100 rounded-2xl p-10 hover:shadow-xl hover:border-emerald-100 transition-all group">
-                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                    <Icon className="w-7 h-7 text-emerald-600" />
+                <div key={d.title} className="bg-white border border-slate-200 rounded-xl p-8">
+                  <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-emerald-600" />
                   </div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">{d.title}</h3>
-                  <p className="text-slate-600 mb-6 leading-relaxed">{d.desc}</p>
-                  <button className="inline-flex items-center gap-2 bg-white text-slate-700 px-5 py-3 rounded-lg text-sm font-medium border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all">
-                    <Link className="w-4 h-4" />
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{d.title}</h3>
+                  <p className="text-slate-600 mb-4">{d.desc}</p>
+                  <button className="inline-flex items-center gap-2 bg-white text-slate-900 px-4 py-2.5 rounded-lg text-sm font-semibold border border-slate-200 hover:bg-slate-50 transition-colors">
+                    <LinkIcon className="w-4 h-4" />
                     {d.cta.label}
                   </button>
                 </div>
@@ -237,32 +230,32 @@ const Resources = () => {
             })}
           </div>
 
-          <div className="mt-16 text-center">
+          <div className="mt-12 text-center">
             <a
               href="#"
-              className="inline-flex items-center gap-3 text-slate-700 hover:text-slate-900 font-medium text-lg group"
+              className="inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-semibold"
             >
-              <FolderGit2 className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <FolderGit2 className="w-5 h-5" />
               Explore example apps and workflows
             </a>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-24 px-6">
+      {/* CTA — emerald dark strip */}
+      <section className="bg-slate-900 py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-light text-white mb-6 tracking-tight">
-            Ready to Go from Research to <span className="font-semibold">Results?</span>
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Ready to Go from Research to Results?
           </h2>
-          <p className="text-xl text-slate-300 mb-10 leading-relaxed">
+          <p className="text-xl text-slate-300 mb-8">
             Use our playbooks, APIs, and datasets to deploy MRV in weeks.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <button className="bg-emerald-600 text-white px-10 py-4 rounded-lg font-medium hover:bg-emerald-500 transition-all shadow-lg hover:shadow-xl">
+            <button className="bg-emerald-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-emerald-700 transition-colors">
               Access Developer Hub
             </button>
-            <button className="bg-transparent text-white px-10 py-4 rounded-lg font-medium border-2 border-slate-600 hover:border-white hover:bg-white/10 transition-all">
+            <button className="bg-transparent text-white px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white hover:text-slate-900 transition-colors">
               View Documentation
             </button>
           </div>

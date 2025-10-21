@@ -11,6 +11,9 @@ import Platform from "./pages/Platform.jsx";
 import Resources from "./pages/Resources.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
+import Login from "./pages/Login.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import ProjectDetail from "./components/Dashboard/ProjectDetail.jsx";
 
 // Simple placeholders so routes work even if pages aren't built yet
 const Placeholder = ({ title }) => (
@@ -33,6 +36,11 @@ export default function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/projects/:id" element={<ProjectDetail/>} />
+
+          
 
           {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
