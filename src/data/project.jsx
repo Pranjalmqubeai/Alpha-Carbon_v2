@@ -10,7 +10,7 @@ export const PROJECTS = [
     sdgScore: 8,
     thumb: "https://images.unsplash.com/photo-1523978591478-c753949ff840?q=80&w=1600&auto=format&fit=crop",
     images: [
-      "https://images.unsplash.com/photo-1508780709619-79562169bc64?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop",
     ],
     coords: { lat: -11.5, lng: -69.5 },
