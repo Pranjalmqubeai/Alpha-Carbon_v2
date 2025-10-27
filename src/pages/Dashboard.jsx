@@ -1,8 +1,9 @@
-// src/pages/Dashboard.jsx
 import React, { useState } from "react";
 import { ChevronDown, Search, Filter, Grid3x3, LayoutGrid } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { PROJECTS } from "../data/project";
+// REMOVE: import { PROJECTS } from "../data/project";
+import { useProjects } from "../hooks/useproject";
+import ProjectCard from "../components/Dashboard/ProjectCard"; // your existing card that expects {p}
 
 const CATEGORIES = ["All Projects", "Renewable Energy", "Conservation", "Ocean Conservation", "Reforestation"];
 const FILTERS = [
@@ -10,67 +11,6 @@ const FILTERS = [
   { label: "Price Range", options: ["< $50k", "$50k - $100k", "> $100k"] },
   { label: "Location", options: ["North America", "South America", "Europe", "Asia", "Africa"] }
 ];
-
-function ProjectCard({ project }) {
-  const navigate = useNavigate();
-  const go = () => navigate(`/projects/${project.id}`);
-
-  return (
-    <div
-      onClick={go}
-      className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 cursor-pointer"
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && go()}
-    >
-      <div className="relative overflow-hidden h-56">
-        <img 
-          src={project.image} 
-          alt={project.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-        />
-        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-medium text-gray-700">
-          {project.category}
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-          <div className="flex items-center gap-1 text-yellow-400 text-sm">
-            <span>★</span>
-            <span className="text-white font-medium">{project.rating}</span>
-          </div>
-        </div>
-      </div>
-      
-      <div className="p-6">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{project.description}</p>
-        
-        <div className="space-y-2 mb-4">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500">Location</span>
-            <span className="text-gray-900 font-medium">{project.location}</span>
-          </div>
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-500">Impact</span>
-            <span className="text-emerald-600 font-medium">{project.impact}</span>
-          </div>
-        </div>
-        
-        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-          <span className="text-2xl font-bold text-gray-900">{project.price}</span>
-          <button
-            type="button"
-            onClick={(e) => { e.stopPropagation(); go(); }}
-            className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium transition-colors"
-          >
-            View Details
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function FilterSection({ title, options }) {
   const [expanded, setExpanded] = useState(true);
@@ -98,6 +38,19 @@ export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState("All Projects");
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState("grid");
+
+  const { projects, count, hasMore, loadMore, loading, error } = useProjects();
+
+  // Light client-side filtering (optional)
+  const filtered = projects.filter((p) => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      p.title?.toLowerCase().includes(q) ||
+      p.country?.toLowerCase().includes(q) ||
+      p.kind?.toLowerCase().includes(q)
+    );
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-emerald-50/30">
@@ -157,13 +110,17 @@ export default function Dashboard() {
       <div className="max-w-7xl mx-auto px-6 py-8">
         <div className="flex items-center justify-between mb-6">
           <p className="text-gray-600">
-            <span className="font-semibold text-gray-900">{PROJECTS.length}</span> climate projects available
+            <span className="font-semibold text-gray-900">{count}</span> climate projects available
           </p>
           <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-200 hover:bg-white transition-colors bg-white/50 backdrop-blur-sm">
             <span className="text-sm font-medium text-gray-700">Sort by: Top Rated</span>
             <ChevronDown className="w-4 h-4 text-gray-500" />
           </button>
         </div>
+
+        {error && (
+          <div className="mb-6 text-red-600 bg-red-50 border border-red-200 rounded-lg p-3">{error}</div>
+        )}
 
         <div className="flex gap-8">
           {/* Sidebar */}
@@ -183,17 +140,31 @@ export default function Dashboard() {
 
           {/* Grid */}
           <main className="flex-1">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {PROJECTS.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
+            {loading && projects.length === 0 ? (
+              <div className="p-8 text-center text-gray-600">Loading projects…</div>
+            ) : (
+              <>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {filtered.map((p) => (
+                    <ProjectCard key={p.id} p={p} />
+                  ))}
+                </div>
 
-            <div className="mt-12 text-center">
-              <button className="px-8 py-3.5 bg-white hover:bg-gray-50 text-gray-900 rounded-xl font-medium border border-gray-200 transition-colors shadow-sm">
-                Load More Projects
-              </button>
-            </div>
+                <div className="mt-12 text-center">
+                  {hasMore ? (
+                    <button
+                      onClick={loadMore}
+                      className="px-8 py-3.5 bg-white hover:bg-gray-50 text-gray-900 rounded-xl font-medium border border-gray-200 transition-colors shadow-sm disabled:opacity-50"
+                      disabled={loading}
+                    >
+                      {loading ? "Loading…" : "Load More Projects"}
+                    </button>
+                  ) : (
+                    <span className="text-gray-500">No more projects</span>
+                  )}
+                </div>
+              </>
+            )}
           </main>
         </div>
       </div>
