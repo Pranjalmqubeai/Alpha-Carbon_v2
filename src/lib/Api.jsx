@@ -1,4 +1,5 @@
-const API_BASE ="http://127.0.0.1:8000";
+import BASE_URL from "../BaseUrl";
+const API_BASE = BASE_URL
 
 export async function fetchProjects({ pageUrl } = {}) {
   const url = pageUrl ?? `${API_BASE}/projects/projectsapi/`;

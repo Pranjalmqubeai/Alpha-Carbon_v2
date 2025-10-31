@@ -1,22 +1,20 @@
-import React, { useState } from "react";
-import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { User, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate=useNavigate();
+
+  const { login } = useContext(AuthContext);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // TODO: Replace with your real login call
-    setTimeout(() => {
-      setLoading(false);
-        alert("Login successful (demo)");
-        navigate("/dashboard");
-    }, 1000);
+    await login(username, password);
+    setLoading(false);
   };
 
   return (
@@ -26,21 +24,22 @@ export default function Login() {
           Welcome Back
         </h2>
         <p className="text-slate-600 text-center mb-8">
-          Sign in to continue to <span className="font-semibold text-emerald-600">Carbon OS</span>
+          Sign in to continue to{" "}
+          <span className="font-semibold text-emerald-600">Carbon OS</span>
         </p>
 
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              Email
+              Username
             </label>
-            <div className="flex items-center border border-slate-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-emerald-100">
-              <Mail className="w-5 h-5 text-slate-400 mr-2" />
+            <div className="flex items-center border border-slate-300 rounded-lg px-3 py-2">
+              <User className="w-5 h-5 text-slate-400 mr-2" />
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@company.com"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your username"
                 className="w-full outline-none bg-transparent text-slate-900"
                 required
               />
@@ -51,7 +50,7 @@ export default function Login() {
             <label className="block text-sm font-medium text-slate-700 mb-1">
               Password
             </label>
-            <div className="flex items-center border border-slate-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-emerald-100">
+            <div className="flex items-center border border-slate-300 rounded-lg px-3 py-2">
               <Lock className="w-5 h-5 text-slate-400 mr-2" />
               <input
                 type={showPassword ? "text" : "password"}
@@ -66,7 +65,11 @@ export default function Login() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="text-slate-500 hover:text-slate-700"
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
               </button>
             </div>
           </div>
@@ -82,7 +85,10 @@ export default function Login() {
 
           <p className="text-sm text-center text-slate-500">
             Don’t have an account?{" "}
-            <a href="/signup" className="text-emerald-600 font-medium hover:underline">
+            <a
+              href="/signup"
+              className="text-emerald-600 font-medium hover:underline"
+            >
               Sign up
             </a>
           </p>

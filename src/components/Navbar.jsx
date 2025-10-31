@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronRight } from "lucide-react";
 import logo from "../assets/logo.png";
+import { AuthContext } from "../context/AuthContext";
 
 const links = [
   { to: "/", label: "Home" },
@@ -13,6 +14,13 @@ const links = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/signin");
+  };
 
   const baseItem =
     "relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300";
@@ -59,9 +67,8 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `${baseItem} ${isActive ? activeExtras : inactiveExtras}`
               }
-              end={link.to === "/"} // 'Home' exact match
+              end={link.to === "/"} // exact for home
             >
-              {/* soft active background */}
               {({ isActive }) => (
                 <>
                   {isActive && (
@@ -74,25 +81,41 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* CTA Button */}
+        {/* Right Section (Dynamic) */}
         <div className="hidden lg:flex items-center gap-4">
-          <Link
-            to="/signin"
-            className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-emerald-700 transition-colors"
-          >
-            Sign In
-          </Link>
-          <Link
-            to="/contact"
-            className="group relative px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-sm shadow-lg hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 overflow-hidden"
-          >
-            <span className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-            <span className="relative">Schedule Demo</span>
-            <ChevronRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          {!user ? (
+            <>
+              <Link
+                to="/signin"
+                className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-emerald-700 transition-colors"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/contact"
+                className="group relative px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-sm shadow-lg hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 overflow-hidden"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="relative">Schedule Demo</span>
+                <ChevronRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </>
+          ) : (
+            <>
+              <span className="text-sm font-semibold text-slate-700">
+                Hi, {user.username}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-emerald-600 text-white rounded-lg font-semibold text-sm hover:bg-emerald-700 transition-all"
+              >
+                Logout
+              </button>
+            </>
+          )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button
           onClick={() => setMobileMenuOpen((s) => !s)}
           className="lg:hidden p-2 text-slate-700 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition-colors"
@@ -122,28 +145,39 @@ export default function Navbar() {
               >
                 <div className="flex items-center justify-between">
                   {link.label}
-                  {/* optional active chevron handled by CSS color */}
                 </div>
               </NavLink>
             ))}
-          </nav>
 
-          <div className="px-6 pb-6 pt-4 border-t border-emerald-100 space-y-3">
-            <Link
-              to="/signin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full block text-center px-4 py-3 text-sm font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 rounded-xl transition-colors"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full block text-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-sm shadow-lg"
-            >
-              Schedule Demo
-            </Link>
-          </div>
+            {/* Auth Buttons */}
+            <div className="mt-4 border-t border-emerald-100 pt-4 space-y-3">
+              {!user ? (
+                <>
+                  <Link
+                    to="/signin"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full block text-center px-4 py-3 text-sm font-semibold text-slate-700 bg-slate-50 hover:bg-slate-100 rounded-xl transition-colors"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    to="/contact"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-full block text-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-sm shadow-lg"
+                  >
+                    Schedule Demo
+                  </Link>
+                </>
+              ) : (
+                <button
+                  onClick={handleLogout}
+                  className="w-full block text-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-sm shadow-lg"
+                >
+                  Logout
+                </button>
+              )}
+            </div>
+          </nav>
         </div>
       )}
 
