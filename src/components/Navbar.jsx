@@ -47,9 +47,9 @@ export default function Navbar() {
           </div>
           <div className="flex flex-col">
             <span className="text-xl font-black text-slate-900">
-              Alpha{" "}
+              Climate{" "}
               <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                Carbon
+                Trade
               </span>
             </span>
             <span className="text-xs text-slate-500 font-medium -mt-0.5">
