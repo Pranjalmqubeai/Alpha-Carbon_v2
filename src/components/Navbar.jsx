@@ -1,59 +1,51 @@
-import { useState, useContext } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Menu, X, ChevronRight } from "lucide-react";
+import React, { useContext, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import logo from "../assets/logo.png";
 import { AuthContext } from "../context/AuthContext";
 
 const links = [
   { to: "/", label: "Home" },
   { to: "/platform", label: "Platform" },
-  { to: "/resources", label: "Resources" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await logout();
-    navigate("/signin");
-  };
 
   const baseItem =
-    "relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300";
+    "relative px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:scale-[1.03]";
   const activeExtras = `
     text-emerald-700
     after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2
     after:w-1/2 after:h-0.5 after:rounded-full
     after:bg-gradient-to-r after:from-emerald-500 after:to-teal-500
   `;
-  const inactiveExtras = "text-slate-600 hover:text-slate-900";
+  const inactiveExtras =
+    "text-slate-600 hover:text-slate-900 hover:bg-slate-50/70";
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-xl border-b border-emerald-100 shadow-sm">
-      <div className="mx-auto max-w-7xl px-6 h-20 flex items-center justify-between">
-        {/* Logo */}
+    <header className="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-xl border-b border-emerald-100/70 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 h-18 lg:h-20 flex items-center justify-between">
+        {/* Logo & Title */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="relative">
-            <div className="absolute inset-0 rounded-xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity bg-gradient-to-r from-emerald-500 to-teal-500" />
+          <div className="relative flex-shrink-0">
+            <div className="absolute inset-0 rounded-2xl blur-xl opacity-25 group-hover:opacity-40 transition-opacity bg-gradient-to-r from-emerald-500 to-teal-600" />
             <img
               src={logo}
-              alt="Alpha Carbon logo"
-              className="relative w-10 h-10 rounded-xl object-contain shadow-lg border border-emerald-100"
+              alt="AlphaCarbon logo"
+              className="relative w-11 h-11 lg:w-12 lg:h-12 rounded-2xl object-contain shadow-md border border-emerald-200/70 group-hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-black text-slate-900">
-              Climate{" "}
-              <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                Trade
+          <div className="flex flex-col leading-tight">
+            <span className="text-[1.15rem] sm:text-lg lg:text-xl font-black tracking-tight">
+              <span className="text-slate-900">AlphaCarbon</span>{" "}
+              <span className="bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 bg-clip-text text-transparent animate-gradient">
+                Integrity Platform
               </span>
             </span>
-            <span className="text-xs text-slate-500 font-medium -mt-0.5">
-              Carbon OS Platform
+            <span className="text-[0.7rem] sm:text-xs text-slate-500 font-medium">
+              Carbon Intelligence • Verification • Trust
             </span>
           </div>
         </Link>
@@ -64,10 +56,10 @@ export default function Navbar() {
             <NavLink
               key={link.to}
               to={link.to}
+              end={link.to === "/"}
               className={({ isActive }) =>
                 `${baseItem} ${isActive ? activeExtras : inactiveExtras}`
               }
-              end={link.to === "/"} // exact for home
             >
               {({ isActive }) => (
                 <>
@@ -81,8 +73,8 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Right Section (Dynamic) */}
-        <div className="hidden lg:flex items-center gap-4">
+        {/* Auth Section (Desktop) */}
+        <div className="hidden lg:flex items-center gap-3">
           {!user ? (
             <>
               <Link
@@ -92,22 +84,20 @@ export default function Navbar() {
                 Sign In
               </Link>
               <Link
-                to="/contact"
-                className="group relative px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-sm shadow-lg hover:shadow-xl hover:shadow-emerald-500/30 transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 overflow-hidden"
+                to="/signup"
+                className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 transition-colors shadow-sm hover:shadow"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="relative">Schedule Demo</span>
-                <ChevronRight className="relative w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Create Account
               </Link>
             </>
           ) : (
             <>
-              <span className="text-sm font-semibold text-slate-700">
-                Hi, {user.username}
+              <span className="px-3 py-2 rounded-xl text-sm font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200">
+                Hi, {user.username || user.name || "User"}
               </span>
               <button
-                onClick={handleLogout}
-                className="px-4 py-2 bg-emerald-600 text-white rounded-lg font-semibold text-sm hover:bg-emerald-700 transition-all"
+                onClick={logout}
+                className="px-4 py-2 rounded-xl bg-white text-slate-700 text-sm font-semibold border border-slate-200 hover:bg-slate-50 transition-colors"
               >
                 Logout
               </button>
@@ -127,7 +117,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-emerald-100 shadow-xl animate-fade-in">
+        <div className="lg:hidden bg-white/95 backdrop-blur border-t border-emerald-100 shadow-xl animate-fade-in">
           <nav className="px-6 py-6 space-y-2">
             {links.map((link) => (
               <NavLink
@@ -143,13 +133,11 @@ export default function Navbar() {
                 }
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="flex items-center justify-between">
-                  {link.label}
-                </div>
+                {link.label}
               </NavLink>
             ))}
 
-            {/* Auth Buttons */}
+            {/* Mobile Auth Buttons */}
             <div className="mt-4 border-t border-emerald-100 pt-4 space-y-3">
               {!user ? (
                 <>
@@ -161,16 +149,19 @@ export default function Navbar() {
                     Sign In
                   </Link>
                   <Link
-                    to="/contact"
+                    to="/signup"
                     onClick={() => setMobileMenuOpen(false)}
                     className="w-full block text-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-sm shadow-lg"
                   >
-                    Schedule Demo
+                    Create Account
                   </Link>
                 </>
               ) : (
                 <button
-                  onClick={handleLogout}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    logout();
+                  }}
                   className="w-full block text-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-sm shadow-lg"
                 >
                   Logout
@@ -186,7 +177,12 @@ export default function Navbar() {
           from { opacity: 0; transform: translateY(-10px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
         .animate-fade-in { animation: fade-in 0.2s ease-out; }
+        .animate-gradient { background-size: 200% auto; animation: gradient 3s ease infinite; }
       `}</style>
     </header>
   );
