@@ -36,7 +36,7 @@ export default function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
-            <Route path="/test" element={<AlphaCarbonCCSPlatform />} />
+            {/* <Route path="/test" element={<AlphaCarbonCCSPlatform />} /> */}
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
