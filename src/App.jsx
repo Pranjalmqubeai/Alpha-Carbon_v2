@@ -14,6 +14,7 @@ import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import ProjectDetail from "./components/Dashboard/ProjectDetail.jsx";
 import Signup from "./pages/Signup.jsx";
+import AlphaCarbonCCSPlatform from "./AplhaCarbonTesting.jsx";
 
 // Optional placeholder
 const Placeholder = ({ title }) => (
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/signin" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/test" element={<AlphaCarbonCCSPlatform />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
