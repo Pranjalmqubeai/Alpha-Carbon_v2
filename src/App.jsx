@@ -31,12 +31,13 @@ export default function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Login />} />
+          <Route path="/test" element={<AlphaCarbonCCSPlatform />} />
 
           {/* Private (only authenticated users can access) */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
-            {/* <Route path="/test" element={<AlphaCarbonCCSPlatform />} /> */}
+            
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />
