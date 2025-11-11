@@ -16,7 +16,7 @@ import ProjectDetail from "./components/Dashboard/ProjectDetail.jsx";
 import Signup from "./pages/Signup.jsx";
 import AlphaCarbonCCSPlatform from "./AplhaCarbonTesting.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
-
+import Test from "../src/components/Test.jsx";
 export default function App() {
   return (
     <div className="min-h-screen bg-white text-slate-900">
@@ -32,6 +32,7 @@ export default function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/test" element={<AlphaCarbonCCSPlatform />} />
+          <Route path="/test2" element={<Test />} />
 
           {/* Private (only authenticated users can access) */}
           <Route element={<ProtectedRoute />}>
