@@ -22,6 +22,7 @@ export default function App() {
     <div className="min-h-screen bg-white text-slate-900">
       <Navbar />
       <main className="pt-16">
+        
         <Routes>
           {/* Public */}
           <Route path="/" element={<Homepage />} />
